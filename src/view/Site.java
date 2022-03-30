@@ -1,11 +1,13 @@
 package view;
 
-import model.*; 
 import java.util.Scanner;
+import model.*;
+
+
 
 public class Site {
     static Scanner ler=new Scanner(System.in);
-
+    
 	public static void main(String[] args) {
 
 		int opc;

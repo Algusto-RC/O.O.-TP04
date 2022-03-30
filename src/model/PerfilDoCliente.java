@@ -1,5 +1,6 @@
 package model;
 
+
 //import java.awt.Image;
 
 public class PerfilDoCliente extends Perfil {
@@ -23,7 +24,7 @@ public class PerfilDoCliente extends Perfil {
 		idade=ler.nextLine();
 		System.out.println(" ");
 
-		System.out.println("Digite o seu endereço: ");
+		System.out.println("Digite o seu endereco: ");
 		endereco.cadastrar();	
 		System.out.println(" ");
 
