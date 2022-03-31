@@ -12,13 +12,10 @@ public class ControleContato {
 	public void cadastrarTelefone() {
 		telefone = ler.nextLine();
 		ctt.setTelefone(telefone);
-		
 	}
 	
 	public void cadastrarEmail() {
-		
 		email = ler.nextLine();
 		ctt.setEmail(email);
 	}
-	
 }

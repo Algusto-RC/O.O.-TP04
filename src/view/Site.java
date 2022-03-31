@@ -1,16 +1,67 @@
 package view;
 
-import java.util.Scanner;
+import java.awt.*; 
+import java.awt.event.*; 
+import javax.swing.*; 
+import java.util.*;
 import model.*;
 
-
-
-public class Site {
+public class Site implements ActionListener {
     static Scanner ler=new Scanner(System.in);
-    
-	public static void main(String[] args) {
 
+	JTextField texto; 
+	JButton pcliente, pprofissional; 
+	JLabel titulo, interno, externo;
+
+	public Site() { 
+		// Cria um novo container JFrame.  
+		JFrame t_principal = new JFrame("Marido de aluguel T6.3"); 
+		// Especifica o uso do FlowLayout.   
+		t_principal.setLayout(null); 
+		// Define o tamanho do frame.  
+		t_principal.setSize(1000, 500); 
+		// Encerra o programa caso o usuário feche a aplicação.  
+		t_principal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+		titulo = new JLabel("ESCOLHA UM TIPO DE PERFIL");
+		titulo.setFont(new Font("Arial", Font.BOLD, 20));
+		titulo.setBounds(350, 10, 300, 50);
+		// Cria um botão para a interface de clientes.  
+		JButton pcliente = new JButton("Cliente"); 
+		pcliente.setBounds(350, 100, 130, 30);
+		// Cria um botão para a interface de profissionais.  
+		JButton pprofissional = new JButton("Profissional");
+		pprofissional.setBounds(500, 100, 130, 30);
+		// Adiciona eventos.  
+		pcliente.addActionListener(this); 
+		pprofissional.addActionListener(this); 
+		// Adiciona os componentes ao painel de conteúdo.
+		t_principal.add(titulo);  
+		t_principal.add(pcliente); 
+		t_principal.add(pprofissional);		
+		// Mostra o frame construído.  
+		t_principal.setVisible(true); 
+	} 
+		
+	//Método para gerência de eventos 
+	public void actionPerformed(ActionEvent ae) { 
+		if(ae.getActionCommand().equals("Cliente")) { 
+			// Converte as letras para maiúsculo caso o botão seja pressionado.   
+			String orgStr = texto.getText(); 
+			String resStr = orgStr.toUpperCase(); 
+			// Cria rótulos.  
+			texto.setText(resStr);  
+		} else {
+			// A tecla enter é pressionada enquanto o cursor estana no campo de texto. 
+			externo.setText("You pressed ENTER. Text is: " + 
+			texto.getText()); 
+		} 
+	}
+	public static void main(String[] args) {		
+		
+		new Site();  
 		int opc;
+		
+		
 		//PerfilDoProfissional pdp;
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		System.out.println("--------------------------------------------------");
