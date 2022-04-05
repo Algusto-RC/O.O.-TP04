@@ -92,11 +92,13 @@ public class Site implements ActionListener {
 			painelPrincipal.setVisible(false);
 			painelCliente.cadastrarComponent(telaPrincipal);
 			painelCliente.setVisible(true);
+			cancelar.setVisible(true);
 
 		}else if (ae.getActionCommand().equals("Profissional")) {
 			painelPrincipal.setVisible(false);
 			painelProfissional.cadastraComponent(telaPrincipal);
 			painelProfissional.setVisible(true);
+			cancelar.setVisible(true);
 		} 
 
 
@@ -106,6 +108,7 @@ public class Site implements ActionListener {
 		}else if (ae.getActionCommand().equals("Cancelar")) {
             painelCliente.setVisible(false);
 			painelPrincipal.setVisible(true);
+			cancelar.setVisible(false);
 		} 
 	}
 
