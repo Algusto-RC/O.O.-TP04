@@ -2,60 +2,125 @@ package view;
 
 import java.awt.*; 
 import java.awt.event.*; 
-import javax.swing.*; 
+import javax.swing.*;
+
+import org.w3c.dom.events.MouseEvent;
+
 import java.util.*;
 import model.*;
+import control.*;
 
 public class Site implements ActionListener {
     static Scanner ler=new Scanner(System.in);
 
+	JFrame telaPrincipal;
 	JTextField texto; 
-	JButton pcliente, pprofissional; 
-	JLabel titulo, interno, externo;
+	JButton pcliente, pprofissional, confirmar, cancelar; 
+	JLabel titulo, resultado1, resultado2;
+	JPanel painelPrincipal;
+	ViewPerfildoCliente painelCliente;
+	ViewPerfildoProfissional painelProfissional;
 
 	public Site() { 
-		// Cria um novo container JFrame.  
-		JFrame t_principal = new JFrame("Marido de aluguel T6.3"); 
-		// Especifica o uso do FlowLayout.   
-		t_principal.setLayout(null); 
-		// Define o tamanho do frame.  
-		t_principal.setSize(1000, 500); 
-		// Encerra o programa caso o usuário feche a aplicação.  
-		t_principal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-		titulo = new JLabel("ESCOLHA UM TIPO DE PERFIL");
-		titulo.setFont(new Font("Arial", Font.BOLD, 20));
-		titulo.setBounds(350, 10, 300, 50);
-		// Cria um botão para a interface de clientes.  
-		JButton pcliente = new JButton("Cliente"); 
-		pcliente.setBounds(350, 100, 130, 30);
-		// Cria um botão para a interface de profissionais.  
-		JButton pprofissional = new JButton("Profissional");
-		pprofissional.setBounds(500, 100, 130, 30);
-		// Adiciona eventos.  
-		pcliente.addActionListener(this); 
-		pprofissional.addActionListener(this); 
-		// Adiciona os componentes ao painel de conteúdo.
-		t_principal.add(titulo);  
-		t_principal.add(pcliente); 
-		t_principal.add(pprofissional);		
-		// Mostra o frame construído.  
-		t_principal.setVisible(true); 
-	} 
+		// Criando e  configurando o JFrame principal.  
+		telaPrincipal = new JFrame("Marido de aluguel T6.3"); 
+		telaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		telaPrincipal.setSize(1300, 700); 
+		telaPrincipal.setLayout(null); 
+		telaPrincipal.setLocationRelativeTo(null); 
+		//-----------------------//-----------------------//-----------------------
+		// Criando e configurando o JPanel principal.  
+		painelPrincipal = new JPanel(); 
+		painelPrincipal.setSize(1300, 700); 
+		painelPrincipal.setLayout(null); 
+		painelPrincipal.setVisible(true);
+		//-----------------------//-----------------------//-----------------------
+		// Criando e configurando o JPanel dos clientes.  
+		painelCliente = new ViewPerfildoCliente(); 
+ 
+		//-----------------------//-----------------------//-----------------------
+		// Criando e configurando o JPanel dos profissionais.  
+		painelProfissional = new ViewPerfildoProfissional(); 
 		
-	//Método para gerência de eventos 
+	//-------------------------------------------------------------------------------------------------------------------------
+		//-----------------------//-----------------------//-----------------------
+		// Criando e  configurando um titulo para o JPanel principal.  
+		titulo = new JLabel("ESCOLHA SEU TIPO DE PERFIL");
+		titulo.setFont(new Font("Arial", Font.BOLD, 25));
+		titulo.setBounds(775, 70, 400, 50);
+		//-----------------------//-----------------------//-----------------------
+		// Criando e configurando um botao para a interface de clientes.  
+		JButton pcliente = new JButton("Cliente"); 
+		pcliente.setBounds(830, 160, 250, 30);
+		pcliente.addActionListener(this); 
+		//-----------------------//-----------------------//-----------------------
+		// Criando e configurando um botao para a interface de profissionais.  
+		JButton pprofissional = new JButton("Profissional");
+		pprofissional.setBounds(830, 210, 250, 30);
+		pprofissional.addActionListener(this); 
+		//-----------------------//-----------------------//-----------------------
+		//Criando e configurando os botoes.
+		confirmar = new JButton("Confirmar");
+		confirmar.setBounds(55, 590, 130, 30);
+		confirmar.addActionListener(this); 
+		cancelar = new JButton("Cancelar");
+		cancelar.setBounds(225, 590, 130, 30);
+		cancelar.addActionListener(this); 
+
+	//-------------------------------------------------------------------------------------------------------------------------
+		// Adiciona os componentes ao Painel principal.
+		painelPrincipal.add(titulo);  
+		painelPrincipal.add(pcliente); 
+		painelPrincipal.add(pprofissional);	
+		// Adiciona os componentes ao Painel principal.
+		painelCliente.cadastrarComponent(confirmar); 
+		painelCliente.cadastrarComponent(cancelar);
+		//-----------------------//-----------------------//-----------------------
+		// Adiciona JPanels ao JFrame principal.
+		telaPrincipal.add(painelPrincipal);	
+		telaPrincipal.add(painelCliente);
+		telaPrincipal.add(painelProfissional);
+		//-------------------------------------------------------------------------------------------------------------------------
+		//Habilitando a visibilidade do Jframe principal.
+		telaPrincipal.setVisible(true); 
+	} 
+
+	//-------------------------------------------------------------------------------------------------------------------------
+	//MÉTODO PARA GERENCIAR EVENTOS 
 	public void actionPerformed(ActionEvent ae) { 
-		if(ae.getActionCommand().equals("Cliente")) { 
-			// Converte as letras para maiúsculo caso o botão seja pressionado.   
-			String orgStr = texto.getText(); 
-			String resStr = orgStr.toUpperCase(); 
-			// Cria rótulos.  
-			texto.setText(resStr);  
-		} else {
-			// A tecla enter é pressionada enquanto o cursor estana no campo de texto. 
-			externo.setText("You pressed ENTER. Text is: " + 
-			texto.getText()); 
+		if(ae.getActionCommand().equals("Cliente")) {  
+			painelPrincipal.setVisible(false);
+			painelCliente.cadastrarComponent(telaPrincipal);
+			painelCliente.setVisible(true);
+
+		}else if (ae.getActionCommand().equals("Profissional")) {
+			painelPrincipal.setVisible(false);
+			painelProfissional.cadastraComponent(telaPrincipal);
+			painelProfissional.setVisible(true);
+		} 
+
+
+		if(ae.getActionCommand().equals("Confirmar")) {  
+			//TODO Devolver o botão "Confirmar" para a classe ViewPedidodoCliente.
+
+		}else if (ae.getActionCommand().equals("Cancelar")) {
+            painelCliente.setVisible(false);
+			painelPrincipal.setVisible(true);
 		} 
 	}
+
+	public void retornarTela(){
+		painelPrincipal.setVisible(true);
+    }
+
+
+
+
+
+
+
+
+	
 	public static void main(String[] args) {		
 		
 		new Site();  
