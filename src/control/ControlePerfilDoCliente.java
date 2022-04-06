@@ -2,15 +2,17 @@ package control;
 
 import model.*;
 
-public class ControlePerfilDoCliente extends PerfilDoCliente {
-	public ControlePerfilDoCliente(String nome, String cpf_cnpj, String idade, Endereco endereco) {
+public class ControlePerfilDoCliente {
+	private String nome, cpf_cpnj, idade, pais, cidade, cep, logradouro, uf;
+
+	/*public ControlePerfilDoCliente(String nome, String cpf_cnpj, String idade, Endereco endereco) {
 		super(nome, cpf_cnpj, idade, endereco);
 		// TODO Auto-generated constructor stub
-	}
+	}*/
 
-	private String nome, cpf_cpnj, idade, pais, cidade, cep, logradouro, uf;
-	
-	
+	public ControlePerfilDoCliente(String nome){
+		this.nome = nome;
+	}
 
 	public String getNome() {
 		return nome;
@@ -19,7 +21,6 @@ public class ControlePerfilDoCliente extends PerfilDoCliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	
 	public boolean validaNome(String nome) {
 		boolean verifica=true;

@@ -1,59 +1,62 @@
 package view;
 
-import java.awt.*; 
-import java.awt.event.*; 
-import javax.swing.*; 
+// programa swing_button_2.java
+// inicio do programa swing_button - versao 2.1
 
-public class Testador implements ActionListener{
-    JTextField jtf; 
-    JButton jbtnRev; 
-    JLabel jlabPrompt, jlabContents;  
+import javax.swing.*;  //All swing components live
+		       //in the javax.swing package
 
-    public Testador() { 
-        // Cria um novo container JFrame.  
-        JFrame jfrm = new JFrame("Marido de aluguel T6.3"); 
-        // Especifica o uso do FlowLayout.   
-        jfrm.setLayout(new FlowLayout()); 
-        // Define o tamanho do frame.  
-        jfrm.setSize(600, 600); 
-        // Encerra o programa caso o usuário feche a aplicação.  
-        jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        //Cria um campo de texto.  
-        jtf = new JTextField(10); 
-        // Define uma ação pata o campo de texto.  
-        jtf.setActionCommand("myTF"); 
-        // Cria o botão com para transformar todas as letras em maiúsculo.  
-        JButton jbtnRev = new JButton("Vai ficar grande"); 
-        // Adiciona eventos.  
-        jtf.addActionListener(this); 
-        jbtnRev.addActionListener(this); 
-        // Armazena a nova string no campo de texto.  
-        jlabPrompt = new JLabel("Digite um texto: "); 
-        jlabContents = new JLabel(""); 
-        // Adiciona os componentes ao painel de conteúdo.  
-        jfrm.add(jlabPrompt); 
-        jfrm.add(jtf);  
-        jfrm.add(jbtnRev);  
-        jfrm.add(jlabContents); 
-        // Mostra o frame construído.  
-        jfrm.setVisible(true); 
-    } 
-    //Método para gerência de eventos 
-    public void actionPerformed(ActionEvent ae) { 
-        if(ae.getActionCommand().equals("Vai ficar grande")) { 
-            // Converte as letras para maiúsculo caso o botão seja pressionado.   
-            String orgStr = jtf.getText(); 
-            String resStr = orgStr.toUpperCase(); 
-            // Cria rótulos.  
-            jtf.setText(resStr);  
-        } else {
-            // A tecla enter é pressionada enquanto o cursor estana no campo de texto. 
-            jlabContents.setText("You pressed ENTER. Text is: " + 
-            jtf.getText()); 
-        } 
-    }
-    public static void main(String args[]) { 
-        new Testador();  
-    } 
-}    
+import java.awt.*;
+import java.awt.event.*;
+
+// a classe swing_button_2 antes era subclasse de Object
+// agora, torna-se subclasse de JFrame e implementa as
+// interfaces da classe ActionListener
+public class Testador extends JFrame implements ActionListener {
+
+	// os widgets que eram criados no main
+	// agora são membros da classe
+	static Box vbox;
+	static JButton button1;
+	static JTextField entry1;
+
+	// ActionListener faz button1 iteragir com entry1
+	public void actionPerformed(ActionEvent e) {
+		entry1.setText("OK");
+	};
+
+	public static void main(String[] args) {
+
+		// o frame é criado no main (como antes)
+		// a diferença é que chamamos o constructor da classe
+		// este constructor se encarrega de montar vbox, button1 e entry1
+        Testador frame = new Testador("swing_button_2");
+
+		// o resto é igual
+		frame.add(vbox);
+ 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(212, 258);
+		frame.setVisible(true);
+	}
+
+	// o trabalho de criar os widgets vbox, button1 e entry1 é feito no constructor da classe
+	public Testador(String title) {
+
+		// super chama o constructor da classe JFrame
+		super(title);
+ 
+		// o resto é igual
+		vbox = new Box(BoxLayout.Y_AXIS);
+		button1 = new JButton("OK");
+		entry1 = new JTextField("");
+
+		// button1 ganha um ActionListener
+		button1.addActionListener(this); 
+
+		vbox.add(button1);
+		vbox.add(entry1);
+
+	}
+}
+ 
 
