@@ -7,13 +7,12 @@ import java.util.*;
 import model.*;
 
 
-public class ViewPerfildoProfissional extends JPanel{
+public class ViewPerfildoProfissional extends JPanel implements ActionListener{
 
-    JPanel painelCliente;
-    JTextField texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8;
-    JButton confirmar, cancelar;
-    JLabel  mensagemExterna1, mensagemExterna2, mensagemExterna3, mensagemExterna4,
-            mensagemExterna5, mensagemExterna6, mensagemExterna7, mensagemExterna8;
+	JPanel painelCliente;
+    JTextField[] texto = new JTextField[8];
+    JButton confirmar;
+    JLabel[]  mensagemExterna = new JLabel[8];
 
     public ViewPerfildoProfissional(){
         //Criando o Painel principal 
@@ -22,101 +21,103 @@ public class ViewPerfildoProfissional extends JPanel{
         painelCliente.setLayout(null); 
         //-----------------------//-----------------------//-----------------------
         //Titulos e campos de texto 
-        mensagemExterna1 = new JLabel(" NOME COMPLETO ");
-		mensagemExterna1.setBounds(55, 30, 300, 50);
-		mensagemExterna1.setVisible(true);
+        mensagemExterna[0] = new JLabel(" NOME COMPLETO ");
+		mensagemExterna[0].setBounds(55, 30, 300, 50);
+		
 
-        texto1 = new JTextField("  Digite seu nome aqui");
-		texto1.setBounds(55, 65, 300, 30);
-		texto1.setVisible(true);
+		texto[0] = new JTextField("  Digite seu nome aqui");
+		texto[0].setBounds(55, 65, 300, 30);
+		
         //========
 
-        mensagemExterna2 = new JLabel(" CPF OU CNPJ ");
-		mensagemExterna2.setBounds(55, 95, 300, 50);
-		mensagemExterna2.setVisible(true);
+		mensagemExterna[1] = new JLabel(" CPF OU CNPJ ");
+		mensagemExterna[1].setBounds(55, 95, 300, 50);
+		
 
-        texto2 = new JTextField("  Digite seu CPF ou CNPJ aqui");
-		texto2.setBounds(55, 130, 300, 30);
-		texto2.setVisible(true);
+		texto[1] = new JTextField("  Digite seu CPF ou CNPJ aqui");
+		texto[1].setBounds(55, 130, 300, 30);
+		
         //========
 
-        mensagemExterna3 = new JLabel(" IDADE ");
-		mensagemExterna3.setBounds(55, 160, 300, 50);
-		mensagemExterna3.setVisible(true);
+		mensagemExterna[2] = new JLabel(" IDADE ");
+		mensagemExterna[2].setBounds(55, 160, 300, 50);
+		
 
-        texto3 = new JTextField("  Digite sua idade aqui");
-		texto3.setBounds(55, 195,  300, 30);
-		texto3.setVisible(true);
+		texto[2] = new JTextField("  Digite sua idade aqui");
+		texto[2].setBounds(55, 195,  300, 30);
+		
         //========
         
         //-------------------ENDERECO
-        mensagemExterna4 = new JLabel(" PAIS ");
-		mensagemExterna4.setBounds(55, 230, 300, 50);
-		mensagemExterna4.setVisible(true);
+		mensagemExterna[3] = new JLabel(" PAIS ");
+		mensagemExterna[3].setBounds(55, 230, 300, 50);
+		
 
-        texto4 = new JTextField("  Digite seu pais aqui");
-		texto4.setBounds(55, 265, 300, 30);
-		texto4.setVisible(true);
+		texto[3] = new JTextField("  Digite seu pais aqui");
+		texto[3].setBounds(55, 265, 300, 30);
+		
         //========
 
-        mensagemExterna5 = new JLabel(" UF ");
-		mensagemExterna5.setBounds(55, 295, 300, 50);
-		mensagemExterna5.setVisible(true);
+		mensagemExterna[4] = new JLabel(" UF ");
+		mensagemExterna[4].setBounds(55, 295, 300, 50);
+		
 
-        texto5 = new JTextField("  Digite sua UF aqui");
-		texto5.setBounds(55, 330, 300, 30);
-		texto5.setVisible(true);
-        //========
-        
-        mensagemExterna6 = new JLabel(" CIDADE ");
-		mensagemExterna6.setBounds(55, 360, 300, 50);
-		mensagemExterna6.setVisible(true);
-
-        texto6 = new JTextField("  Digite sua cidade aqui");
-		texto6.setBounds(55, 395, 300, 30);
-		texto6.setVisible(true);
+		texto[4] = new JTextField("  Digite sua UF aqui");
+		texto[4].setBounds(55, 330, 300, 30);
+		
         //========
         
-        mensagemExterna7 = new JLabel(" CEP ");
-		mensagemExterna7.setBounds(55, 425, 300, 50);
-		mensagemExterna7.setVisible(true);
+		mensagemExterna[5] = new JLabel(" CIDADE ");
+		mensagemExterna[5].setBounds(55, 360, 300, 50);
+		
 
-        texto7 = new JTextField("  Digite seu CEP aqui");
-		texto7.setBounds(55, 460, 300, 30);
-		texto7.setVisible(true);
+		texto[5] = new JTextField("  Digite sua cidade aqui");
+		texto[5].setBounds(55, 395, 300, 30);
+		
         //========
         
-        mensagemExterna8 = new JLabel(" LOGRADOURO ");
-		mensagemExterna8.setBounds(55, 490, 300, 50);
-		mensagemExterna8.setVisible(true);
+		mensagemExterna[6] = new JLabel(" CEP ");
+		mensagemExterna[6].setBounds(55, 425, 300, 50);
+		
 
-        texto8 = new JTextField("  Digite seu logradouro aqui");
-		texto8.setBounds(55, 525, 300, 30);
-		texto8.setVisible(true);
+		texto[6] = new JTextField("  Digite seu CEP aqui");
+		texto[6].setBounds(55, 460, 300, 30);
+		
+        //========
+        
+		mensagemExterna[7] = new JLabel(" LOGRADOURO ");
+		mensagemExterna[7].setBounds(55, 490, 300, 50);
+		
+
+		texto[7] = new JTextField("  Digite seu logradouro aqui");
+		texto[7].setBounds(55, 525, 300, 30);
+		
         //========
         //-----------------------//-----------------------//-----------------------
         //Criando e configurando os botoes.
-        confirmar = new JButton("Confirmar");
-        confirmar.setBounds(55, 590, 130, 30);
-        cancelar = new JButton("Cancelar");
-        cancelar.setBounds(225, 590, 130, 30);
+		confirmar = new JButton("Confirmar");
+		confirmar.setBounds(55, 590, 130, 30);
+		confirmar.addActionListener(this); 
+		
         //-----------------------//-----------------------//-----------------------
         //Adicionando as componentes ao Painel.
-        painelCliente.add(texto1); painelCliente.add(texto2); painelCliente.add(texto3); painelCliente.add(texto4);
-        painelCliente.add(texto5); painelCliente.add(texto6); painelCliente.add(texto7); painelCliente.add(texto8);
+        painelCliente.add(texto[0]); painelCliente.add(texto[1]); painelCliente.add(texto[2]); painelCliente.add(texto[3]);
+        painelCliente.add(texto[4]); painelCliente.add(texto[5]); painelCliente.add(texto[6]); painelCliente.add(texto[7]);
        
-        painelCliente.add(mensagemExterna1); painelCliente.add(mensagemExterna2); painelCliente.add(mensagemExterna3); painelCliente.add(mensagemExterna4);
-        painelCliente.add(mensagemExterna5); painelCliente.add(mensagemExterna6); painelCliente.add(mensagemExterna7); painelCliente.add(mensagemExterna8);
+        painelCliente.add(mensagemExterna[0]); painelCliente.add(mensagemExterna[1]); painelCliente.add(mensagemExterna[2]); painelCliente.add(mensagemExterna[3]);
+        painelCliente.add(mensagemExterna[4]); painelCliente.add(mensagemExterna[5]); painelCliente.add(mensagemExterna[6]); painelCliente.add(mensagemExterna[7]);
         
-        painelCliente.add(confirmar); painelCliente.add(cancelar);
+        painelCliente.add(confirmar);
         //-----------------------//-----------------------//-----------------------
         //Ativando visibilidade.
+        
         painelCliente.setVisible(true);
     }
 
 
-    public void cadastrar(){
 
+    public void cadastrar(){
+        painelCliente.setVisible(true);
     }
 
     public void editar(){
@@ -129,22 +130,34 @@ public class ViewPerfildoProfissional extends JPanel{
         painelCliente.setVisible(true);
     }
 
-    public void cadastraComponent(JFrame princComponent) {
-		princComponent.add(painelCliente);
-        
-        texto1.setVisible(true); texto2.setVisible(true);  texto3.setVisible(true); texto4.setVisible(true); 
-        texto5.setVisible(true); texto6.setVisible(true); texto7.setVisible(true); texto8.setVisible(true);
-
-        mensagemExterna1.setVisible(true); mensagemExterna2.setVisible(true); mensagemExterna3.setVisible(true);
-        mensagemExterna4.setVisible(true); mensagemExterna5.setVisible(true); mensagemExterna6.setVisible(true);
-        mensagemExterna7.setVisible(true); mensagemExterna8.setVisible(true); 
-
-        confirmar.setVisible(true);
-        cancelar.setVisible(true);
+    
+    //Sobrecarga de metodos
+    public void cadastrarComponent(JFrame princComponent) {
+		princComponent.add(painelCliente);    
 	}
 
+    public void cadastrarComponent(JButton bigButton) {
+		painelCliente.add(bigButton);    
+	}
+    
+    public void bloquearLiberarCampos( boolean acao){
+       for(int j=0; j<8;j++) {  	   
+    	   texto[j].setVisible(acao);
+    	   mensagemExterna[j].setVisible(acao);
+       }
+    	confirmar.setVisible(acao);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if(ae.getActionCommand().equals("Confirmar")) {    
+        	confirmar.setVisible(false);
+		} 
+    }
+
     public static void main(String[] args) {
-        new ViewPerfildoCliente();
+        new ViewPerfildoProfissional();
     }
 
 }

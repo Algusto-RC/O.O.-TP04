@@ -15,7 +15,7 @@ public class Site implements ActionListener {
 
 	JFrame telaPrincipal;
 	JTextField texto; 
-	JButton pcliente, pprofissional, confirmar, cancelar; 
+	JButton pcliente, pprofissional, cancelar; 
 	JLabel titulo, resultado1, resultado2;
 	JPanel painelPrincipal;
 	ViewPerfildoCliente painelCliente;
@@ -59,10 +59,7 @@ public class Site implements ActionListener {
 		pprofissional.setBounds(830, 210, 250, 30);
 		pprofissional.addActionListener(this); 
 		//-----------------------//-----------------------//-----------------------
-		//Criando e configurando os botoes.
-		confirmar = new JButton("Confirmar");
-		confirmar.setBounds(55, 590, 130, 30);
-		confirmar.addActionListener(this); 
+		//Criando e configurando os botoes.	
 		cancelar = new JButton("Cancelar");
 		cancelar.setBounds(225, 590, 130, 30);
 		cancelar.addActionListener(this); 
@@ -73,7 +70,6 @@ public class Site implements ActionListener {
 		painelPrincipal.add(pcliente); 
 		painelPrincipal.add(pprofissional);	
 		// Adiciona os componentes ao Painel principal.
-		painelCliente.cadastrarComponent(confirmar); 
 		painelCliente.cadastrarComponent(cancelar);
 		//-----------------------//-----------------------//-----------------------
 		// Adiciona JPanels ao JFrame principal.
@@ -86,27 +82,25 @@ public class Site implements ActionListener {
 	} 
 
 	//-------------------------------------------------------------------------------------------------------------------------
-	//MÉTODO PARA GERENCIAR EVENTOS 
+	//METODO PARA GERENCIAR EVENTOS 
 	public void actionPerformed(ActionEvent ae) { 
 		if(ae.getActionCommand().equals("Cliente")) {  
 			painelPrincipal.setVisible(false);
+			painelCliente.bloquearLiberarCampos(true);
 			painelCliente.cadastrarComponent(telaPrincipal);
 			painelCliente.setVisible(true);
 			cancelar.setVisible(true);
 
 		}else if (ae.getActionCommand().equals("Profissional")) {
 			painelPrincipal.setVisible(false);
-			painelProfissional.cadastraComponent(telaPrincipal);
+			painelProfissional.cadastrarComponent(telaPrincipal);
 			painelProfissional.setVisible(true);
 			cancelar.setVisible(true);
 		} 
 
-
-		if(ae.getActionCommand().equals("Confirmar")) {  
-			//TODO Devolver o botão "Confirmar" para a classe ViewPedidodoCliente.
-
-		}else if (ae.getActionCommand().equals("Cancelar")) {
+		if (ae.getActionCommand().equals("Cancelar")) {
             painelCliente.setVisible(false);
+            painelCliente.bloquearLiberarCampos(false);
 			painelPrincipal.setVisible(true);
 			cancelar.setVisible(false);
 		} 
