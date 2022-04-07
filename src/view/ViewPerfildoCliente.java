@@ -297,7 +297,7 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 profissionais[0].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[0].setBounds(400, 150, 770, 35);
                 profissionais[0].addActionListener(this); 
-                detalheProfissional[0] = new JTextArea("");
+                detalheProfissional[0] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[0].getNome()+". Sou "+servc[0].getTipoDeServico()+", e cobro 50 reais pela diaria.");
                 detalheProfissional[0].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[0].setBounds(300, 50, 100, 50);
                 //========
@@ -309,75 +309,103 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 profissionais[1].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[1].setBounds(400, 190, 770, 35);
                 profissionais[1].addActionListener(this); 
-                detalheProfissional[1] = new JTextArea("");
+                detalheProfissional[1] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[1].getNome()+". Sou "+servc[1].getTipoDeServico()+", e cobro 70 reais pela diaria.");
                 detalheProfissional[1].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[1].setBounds(300, 50, 100, 50);
                 //========
                 endrc[2] = new ControleEndereco("null", "null","null", "null","DF");
                 servc[2] = new ControleServico("MECANICO", "SUPERIOR");
-                ctt[2]= new ControleContato("(63) 97929-5436", "eliasmarujo@gmail.com");
-                profissionaisPreCadastrados[2] = new ControlePerfilDoProfissional("Elias", "066.963.852-02", "22", endrc[2], servc[2], ctt[2], "4");
+                ctt[2]= new ControleContato("(63) 97929-5436", "joaoirmaodemaria@gmail.com");
+                profissionaisPreCadastrados[2] = new ControlePerfilDoProfissional("Joao", "066.963.862-02", "29 anos", endrc[2], servc[2], ctt[2], "4");
                 profissionais[2] = new JButton(profissionaisPreCadastrados[2].getNome() + " -- " + profissionaisPreCadastrados[2].getIdade() + " -- " + servc[2].getTipoDeServico() + " -- " + servc[2].getFormacao());
                 profissionais[2].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[2].setBounds(400, 150, 770, 35);
                 profissionais[2].addActionListener(this); 
-                detalheProfissional[2] = new JTextArea("");
+                detalheProfissional[2] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[2].getNome()+". Sou "+servc[2].getTipoDeServico()+", e cobro 150 reais pela diaria.");
                 detalheProfissional[2].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[2].setBounds(300, 50, 100, 50);
                 //========
-                profissionais[3] = new JButton("Marta Vieira -- 36 anos  -- MECANICO  -- NIVEL SUPERIOR ");
+                endrc[3] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[3] = new ControleServico("MECANICO", "MEDIO");
+                ctt[3]= new ControleContato("(63) 97929-5436", "vilmar2424@gmail.com");
+                profissionaisPreCadastrados[3] = new ControlePerfilDoProfissional("Vilmar", "069.963.852-02", "55 anos", endrc[3], servc[3], ctt[3], "4");
+                profissionais[3] = new JButton(profissionaisPreCadastrados[3].getNome() + " -- " + profissionaisPreCadastrados[3].getIdade() + " -- " + servc[3].getTipoDeServico() + " -- " + servc[3].getFormacao());
                 profissionais[3].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[3].setBounds(400, 190, 770, 35);
                 profissionais[3].addActionListener(this); 
-                detalheProfissional[3] = new JTextArea("");
+                detalheProfissional[3] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[3].getNome()+". Sou "+servc[3].getTipoDeServico()+", e cobro 110 reais pela diaria.");
                 detalheProfissional[3].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[3].setBounds(300, 50, 100, 50);
                 //========
-                profissionais[4] = new JButton(" ");
+                endrc[4] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[4] = new ControleServico("ENCANADOR", "MEDIO");
+                ctt[4]= new ControleContato("(62) 97829-5336", "lissandra.duarte@gmail.com");
+                profissionaisPreCadastrados[4] = new ControlePerfilDoProfissional("Lissandra", "069.963.852-02", "43 anos", endrc[4], servc[4], ctt[4], "4");
+                profissionais[4] = new JButton(profissionaisPreCadastrados[4].getNome() + " -- " + profissionaisPreCadastrados[4].getIdade() + " -- " + servc[4].getTipoDeServico() + " -- " + servc[4].getFormacao());  
                 profissionais[4].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[4].setBounds(400, 150, 770, 35);
                 profissionais[4].addActionListener(this); 
-                detalheProfissional[4] = new JTextArea("");
+                detalheProfissional[4] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[4].getNome()+". Sou "+servc[4].getTipoDeServico()+", e cobro 250 reais pela diaria.");
                 detalheProfissional[4].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[4].setBounds(300, 50, 100, 50);
                 //========
-                profissionais[5] = new JButton(" ");
+                endrc[5] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[5] = new ControleServico("ENCANADOR", "SUPERIOR");
+                ctt[5]= new ControleContato("(66) 97929-5321", "leandrodonizete@gmail.com");
+                profissionaisPreCadastrados[5] = new ControlePerfilDoProfissional("Leandro", "066.963.252-02", "24 anos", endrc[5], servc[5], ctt[5], "4");
+                profissionais[5] = new JButton(profissionaisPreCadastrados[5].getNome() + " -- " + profissionaisPreCadastrados[5].getIdade() + " -- " + servc[5].getTipoDeServico() + " -- " + servc[5].getFormacao());
                 profissionais[5].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[5].setBounds(400, 190, 770, 35);
                 profissionais[5].addActionListener(this); 
-                detalheProfissional[5] = new JTextArea("");
+                detalheProfissional[5] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[5].getNome()+". Sou "+servc[5].getTipoDeServico()+", e cobro 450 reais pela diaria.");
                 detalheProfissional[5].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[5].setBounds(300, 50, 100, 50);
                 //========
-                profissionais[6] = new JButton(" ");
+                endrc[6] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[6] = new ControleServico("FAXINEIRO", "MEDIO");
+                ctt[6]= new ControleContato("(61) 97429-3423", "dioniziocerqueira@gmail.com");
+                profissionaisPreCadastrados[6] = new ControlePerfilDoProfissional("Dionizio", "067.977.852-02", "34 anos", endrc[6], servc[6], ctt[6], "4");
+                profissionais[6] = new JButton(profissionaisPreCadastrados[6].getNome() + " -- " + profissionaisPreCadastrados[6].getIdade() + " -- " + servc[6].getTipoDeServico() + " -- " + servc[6].getFormacao());
                 profissionais[6].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[6].setBounds(400, 150, 770, 35);
                 profissionais[6].addActionListener(this); 
-                detalheProfissional[6] = new JTextArea("");
+                detalheProfissional[6] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[6].getNome()+". Sou "+servc[6].getTipoDeServico()+", e cobro 80 reais pela diaria.");
                 detalheProfissional[6].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[6].setBounds(300, 50, 100, 50);
                 //========
-                profissionais[7] = new JButton(" ");
+                endrc[7] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[7] = new ControleServico("FAXINEIRO", "MEDIO");
+                ctt[7]= new ControleContato("(61) 97927-6236", "petkovicflamengo@gmail.com");
+                profissionaisPreCadastrados[7] = new ControlePerfilDoProfissional("Petkovic", "067.967.822-02", "24 anos", endrc[7], servc[7], ctt[7], "4");
+                profissionais[7] = new JButton(profissionaisPreCadastrados[7].getNome() + " -- " + profissionaisPreCadastrados[7].getIdade() + " -- " + servc[7].getTipoDeServico() + " -- " + servc[7].getFormacao());
                 profissionais[7].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[7].setBounds(400, 190, 770, 35);
                 profissionais[7].addActionListener(this); 
-                detalheProfissional[7] = new JTextArea("");
+                detalheProfissional[7] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[7].getNome()+". Sou "+servc[7].getTipoDeServico()+", e cobro 250 reais pela diaria.");
                 detalheProfissional[7].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[7].setBounds(300, 50, 100, 50);
                 //========
-                profissionais[8] = new JButton(" ");
+                endrc[8] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[8] = new ControleServico("COZINHEIRO", "SUPERIOR");
+                ctt[8]= new ControleContato("(61) 97927-6236", "lucarelisadacruzeiro@gmail.com");
+                profissionaisPreCadastrados[8] = new ControlePerfilDoProfissional("Lucareli", "066.957.222-02", "30 anos", endrc[8], servc[8], ctt[8], "4");
+                profissionais[8] = new JButton(profissionaisPreCadastrados[8].getNome() + " -- " + profissionaisPreCadastrados[8].getIdade() + " -- " + servc[8].getTipoDeServico() + " -- " + servc[8].getFormacao());
                 profissionais[8].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[8].setBounds(400, 150, 770, 35);
                 profissionais[8].addActionListener(this); 
-                detalheProfissional[8] = new JTextArea("");
+                detalheProfissional[8] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[8].getNome()+". Sou "+servc[8].getTipoDeServico()+", e cobro 350 reais pela diaria.");
                 detalheProfissional[8].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[8].setBounds(300, 50, 100, 50);
                 //========
-                profissionais[9] = new JButton(" ");
+                endrc[9] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[9] = new ControleServico("COZINHEIRO", "SUPERIOR");
+                ctt[9]= new ControleContato("(65) 97977-6736", "leonardodavincitartaruga@gmail.com");
+                profissionaisPreCadastrados[9] = new ControlePerfilDoProfissional("Leonardo", "062.267.622-02", "27 anos", endrc[9], servc[9], ctt[9], "4");
+                profissionais[9] = new JButton(profissionaisPreCadastrados[9].getNome() + " -- " + profissionaisPreCadastrados[9].getIdade() + " -- " + servc[9].getTipoDeServico() + " -- " + servc[9].getFormacao());
                 profissionais[9].setFont(new Font("Arial", Font.BOLD, 20));
                 profissionais[9].setBounds(400, 190, 770, 35);
                 profissionais[9].addActionListener(this); 
-                detalheProfissional[9] = new JTextArea("");
+                detalheProfissional[9] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[9].getNome()+". Sou "+servc[9].getTipoDeServico()+", e cobro 350 reais pela diaria.");
                 detalheProfissional[9].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[9].setBounds(300, 50, 100, 50);
                 //========
@@ -760,6 +788,26 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 profissionais[4].setVisible(false); profissionais[5].setVisible(false);
                 profissionais[6].setVisible(false); profissionais[7].setVisible(false);
             }
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[0].getNome() + " -- " + profissionaisPreCadastrados[0].getIdade() + " -- " + servc[0].getTipoDeServico() + " -- " + servc[0].getFormacao())) {
+        	detalheProfissional[0].setVisible(true);
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[1].getNome() + " -- " + profissionaisPreCadastrados[1].getIdade() + " -- " + servc[1].getTipoDeServico() + " -- " + servc[1].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[2].getNome() + " -- " + profissionaisPreCadastrados[2].getIdade() + " -- " + servc[2].getTipoDeServico() + " -- " + servc[2].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[3].getNome() + " -- " + profissionaisPreCadastrados[3].getIdade() + " -- " + servc[3].getTipoDeServico() + " -- " + servc[3].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[4].getNome() + " -- " + profissionaisPreCadastrados[4].getIdade() + " -- " + servc[4].getTipoDeServico() + " -- " + servc[4].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[5].getNome() + " -- " + profissionaisPreCadastrados[5].getIdade() + " -- " + servc[5].getTipoDeServico() + " -- " + servc[5].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[6].getNome() + " -- " + profissionaisPreCadastrados[6].getIdade() + " -- " + servc[6].getTipoDeServico() + " -- " + servc[6].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[7].getNome() + " -- " + profissionaisPreCadastrados[7].getIdade() + " -- " + servc[7].getTipoDeServico() + " -- " + servc[7].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[8].getNome() + " -- " + profissionaisPreCadastrados[8].getIdade() + " -- " + servc[8].getTipoDeServico() + " -- " + servc[8].getFormacao())) {
+        	
+        }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[9].getNome() + " -- " + profissionaisPreCadastrados[9].getIdade() + " -- " + servc[9].getTipoDeServico() + " -- " + servc[9].getFormacao())) {
+        	
         }
     }              
 }
