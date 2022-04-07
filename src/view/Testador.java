@@ -1,62 +1,73 @@
-package view;
-
-// programa swing_button_2.java
-// inicio do programa swing_button - versao 2.1
-
-import javax.swing.*;  //All swing components live
-		       //in the javax.swing package
-
-import java.awt.*;
+/*package view;
+// Java Program to create a simple JComboBox
+// and add elements to it
 import java.awt.event.*;
-
-// a classe swing_button_2 antes era subclasse de Object
-// agora, torna-se subclasse de JFrame e implementa as
-// interfaces da classe ActionListener
-public class Testador extends JFrame implements ActionListener {
-
-	// os widgets que eram criados no main
-	// agora são membros da classe
-	static Box vbox;
-	static JButton button1;
-	static JTextField entry1;
-
-	// ActionListener faz button1 iteragir com entry1
-	public void actionPerformed(ActionEvent e) {
-		entry1.setText("OK");
-	};
-
-	public static void main(String[] args) {
-
-		// o frame é criado no main (como antes)
-		// a diferença é que chamamos o constructor da classe
-		// este constructor se encarrega de montar vbox, button1 e entry1
-        Testador frame = new Testador("swing_button_2");
-
-		// o resto é igual
-		frame.add(vbox);
- 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(212, 258);
-		frame.setVisible(true);
-	}
-
-	// o trabalho de criar os widgets vbox, button1 e entry1 é feito no constructor da classe
-	public Testador(String title) {
-
-		// super chama o constructor da classe JFrame
-		super(title);
+import java.awt.*;
+import javax.swing.*;
+class Testador extends JFrame implements ItemListener {
  
-		// o resto é igual
-		vbox = new Box(BoxLayout.Y_AXIS);
-		button1 = new JButton("OK");
-		entry1 = new JTextField("");
-
-		// button1 ganha um ActionListener
-		button1.addActionListener(this); 
-
-		vbox.add(button1);
-		vbox.add(entry1);
-
-	}
-}
+    // frame
+    static JFrame f;
  
-
+    // label
+    static JLabel l, l1;
+ 
+    // combobox
+    static JComboBox c1;
+ 
+    // main class
+    public static void main(String[] args)
+    {
+        // create a new frame
+        f = new JFrame("frame");
+ 
+        // create a object
+        Testador s = new Testador();
+ 
+        // set layout of frame
+        f.setLayout(new FlowLayout());
+ 
+        // array of string containing cities
+        String s1[] = { "Eletricista", "Mecanico", "Encanador(a)", "Faxineiro(a)", "Cozinheiro(a)" };
+ 
+        // create checkbox
+        c1 = new JComboBox(s1);
+ 
+        // add ItemListener
+        c1.addItemListener(s);
+ 
+        // create labels
+        l = new JLabel("select your city ");
+        l1 = new JLabel("Jalpaiguri selected");
+ 
+        // set color of text
+        l.setForeground(Color.red);
+        l1.setForeground(Color.blue);
+ 
+        // create a new panel
+        JPanel p = new JPanel();
+ 
+        p.add(l);
+ 
+        // add combobox to panel
+        p.add(c1);
+ 
+        p.add(l1);
+ 
+        // add panel to frame
+        f.add(p);
+ 
+        // set the size of frame
+        f.setSize(400, 300);
+ 
+        f.show();
+    }
+    public void itemStateChanged(ItemEvent e)
+    {
+        // if the state combobox is changed
+        if (e.getSource() == c1) {
+ 
+            l1.setText(c1.getSelectedItem() + " selected");
+        }
+    }
+}*/
