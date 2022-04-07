@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Contato {
 	//ATRIBUTOS:
 	static Scanner ler=new Scanner(System.in);
-	private String telefone;
-	private String email;
+	protected String telefone;
+	protected String email;
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//CONSTRUTOR:
 	public Contato(String telefone, String email) {

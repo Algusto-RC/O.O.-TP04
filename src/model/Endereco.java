@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Endereco {
 	//ATRIBUTOS:
 	static Scanner ler=new Scanner(System.in);
-	private String pais;
-	private String cep;
-	private String cidade;
-	private String logradouro;
-	private String uf;
+	protected String pais;
+	protected String cep;
+	protected String cidade;
+	protected String logradouro;
+	protected String uf;
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//CONSTRUTOR:
 	public Endereco(String pais, String cep, String cidade, String logradouro, String uf) {

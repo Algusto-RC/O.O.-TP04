@@ -3,8 +3,9 @@ package view;
 import java.awt.*; 
 import java.awt.event.*; 
 import javax.swing.*;
-import javax.swing.event.AncestorListener;
-import java.util.*;
+
+import org.w3c.dom.events.MouseEvent;
+
 import control.*;
 import model.*;
 
@@ -19,8 +20,8 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
     JLabel[]  mensagemExterna = new JLabel[8];
     ImageIcon imagemFundo;
     JLabel telaFundo;
-    Endereco e = new Endereco("null", "null","null","null", "null");
-    ControlePerfilDoCliente cliente = new ControlePerfilDoCliente("null");
+    Endereco e = new Endereco("null", "null", "null", "null", "null");
+    ControlePerfilDoCliente cliente = new ControlePerfilDoCliente("null", "null", "null", e);
 
     //Componentes  para o campo de visualizacao do perfil
     JTextField[] renomear = new JTextField[8];
@@ -28,8 +29,18 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
     JLabel titulo, msgAviso, msgDespedida, msgSobreposta; JLabel[] infoPerfil = new JLabel[8]; JLabel[] tracejado = new JLabel[2];
     JDialog dialogoDeConfirmacao;
     JPanel painelDialogo;
-    
-    
+
+    //Componentes para o campo de contratação de profissionais 
+    JComboBox filtroPesquisa;
+    String[] servicos = { "Eletricista", "Mecanico", "Encanador", "Faxineiro", "Cozinheiro" };
+    JButton verContratos, cancele, confirme; JButton [] profissionais = new JButton[10];
+    JTextArea[] detalheProfissional = new JTextArea[10];
+    ControlePerfilDoProfissional[] profissionaisPreCadastrados = new ControlePerfilDoProfissional[10]; 
+    ControleEndereco[] endrc = new ControleEndereco[10];
+    ControleServico[] servc = new ControleServico[10];
+    ControleContato[] ctt = new ControleContato[10];
+       
+
     public ViewPerfildoCliente(){
         //Criando o Painel principal 
             painelCliente = new JPanel();
@@ -263,8 +274,139 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 painelCliente.add(visitarPerfil); painelCliente.add(excluirPerfil); painelCliente.add(home);
                 painelCliente.add(editor[0]); painelCliente.add(editor[1]); painelCliente.add(editor[2]); painelCliente.add(editor[3]);
                 painelCliente.add(editor[4]); painelCliente.add(editor[5]); painelCliente.add(editor[6]); painelCliente.add(editor[7]);
-           
                 //-----------------------//-----------------------//-----------------------
+        //-------------------------------------------------------------------------------------------------------------------------
+        //PAINEL PARA CONTRATACAO DE PROFISSIONAIS
+            //Criando e configurando os JComboBox para o filtro de pesquisa
+                filtroPesquisa = new JComboBox<>(servicos);
+                filtroPesquisa.setBounds(1000, 90, 170, 30);
+                filtroPesquisa.addActionListener(this);
+
+                
+            //Criando e configurando os JButtons e os JTextArea para a contratacao de profissionais
+                verContratos = new JButton("Ver Contratos");
+                verContratos.setFont(new Font("Arial", Font.BOLD, 15));
+                verContratos.setBounds(400, 90, 150, 30);
+                verContratos.addActionListener(this); 
+                //========
+                endrc[0] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[0] = new ControleServico("ELETRICISTA", "TECNICO");
+                ctt[0]= new ControleContato("(89) 98361-3677)", "vitor@gmail.com");
+                profissionaisPreCadastrados[0] = new ControlePerfilDoProfissional("Vitor", "055.963.741-02", "25 anos", endrc[0], servc[0], ctt[0], "4");
+                profissionais[0] = new JButton(profissionaisPreCadastrados[0].getNome() + " -- " + profissionaisPreCadastrados[0].getIdade() + " -- " + servc[0].getTipoDeServico() + " -- " + servc[0].getFormacao());
+                profissionais[0].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[0].setBounds(400, 150, 770, 35);
+                profissionais[0].addActionListener(this); 
+                detalheProfissional[0] = new JTextArea("");
+                detalheProfissional[0].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[0].setBounds(300, 50, 100, 50);
+                //========
+                endrc[1] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[1] = new ControleServico("ELETRICISTA", "SUPERIOR");
+                ctt[1]= new ControleContato("(71) 98705-8149", "eliasmarujo@gmail.com");
+                profissionaisPreCadastrados[1] = new ControlePerfilDoProfissional("Elias", "066.963.852-02", "22 anos", endrc[1], servc[1], ctt[1], "4");
+                profissionais[1] = new JButton(profissionaisPreCadastrados[1].getNome() + " -- " + profissionaisPreCadastrados[1].getIdade() + " -- " + servc[1].getTipoDeServico() + " -- " + servc[1].getFormacao());
+                profissionais[1].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[1].setBounds(400, 190, 770, 35);
+                profissionais[1].addActionListener(this); 
+                detalheProfissional[1] = new JTextArea("");
+                detalheProfissional[1].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[1].setBounds(300, 50, 100, 50);
+                //========
+                endrc[2] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[2] = new ControleServico("MECANICO", "SUPERIOR");
+                ctt[2]= new ControleContato("(63) 97929-5436", "eliasmarujo@gmail.com");
+                profissionaisPreCadastrados[2] = new ControlePerfilDoProfissional("Elias", "066.963.852-02", "22", endrc[2], servc[2], ctt[2], "4");
+                profissionais[2] = new JButton(profissionaisPreCadastrados[2].getNome() + " -- " + profissionaisPreCadastrados[2].getIdade() + " -- " + servc[2].getTipoDeServico() + " -- " + servc[2].getFormacao());
+                profissionais[2].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[2].setBounds(400, 150, 770, 35);
+                profissionais[2].addActionListener(this); 
+                detalheProfissional[2] = new JTextArea("");
+                detalheProfissional[2].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[2].setBounds(300, 50, 100, 50);
+                //========
+                profissionais[3] = new JButton("Marta Vieira -- 36 anos  -- MECANICO  -- NIVEL SUPERIOR ");
+                profissionais[3].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[3].setBounds(400, 190, 770, 35);
+                profissionais[3].addActionListener(this); 
+                detalheProfissional[3] = new JTextArea("");
+                detalheProfissional[3].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[3].setBounds(300, 50, 100, 50);
+                //========
+                profissionais[4] = new JButton(" ");
+                profissionais[4].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[4].setBounds(400, 150, 770, 35);
+                profissionais[4].addActionListener(this); 
+                detalheProfissional[4] = new JTextArea("");
+                detalheProfissional[4].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[4].setBounds(300, 50, 100, 50);
+                //========
+                profissionais[5] = new JButton(" ");
+                profissionais[5].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[5].setBounds(400, 190, 770, 35);
+                profissionais[5].addActionListener(this); 
+                detalheProfissional[5] = new JTextArea("");
+                detalheProfissional[5].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[5].setBounds(300, 50, 100, 50);
+                //========
+                profissionais[6] = new JButton(" ");
+                profissionais[6].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[6].setBounds(400, 150, 770, 35);
+                profissionais[6].addActionListener(this); 
+                detalheProfissional[6] = new JTextArea("");
+                detalheProfissional[6].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[6].setBounds(300, 50, 100, 50);
+                //========
+                profissionais[7] = new JButton(" ");
+                profissionais[7].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[7].setBounds(400, 190, 770, 35);
+                profissionais[7].addActionListener(this); 
+                detalheProfissional[7] = new JTextArea("");
+                detalheProfissional[7].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[7].setBounds(300, 50, 100, 50);
+                //========
+                profissionais[8] = new JButton(" ");
+                profissionais[8].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[8].setBounds(400, 150, 770, 35);
+                profissionais[8].addActionListener(this); 
+                detalheProfissional[8] = new JTextArea("");
+                detalheProfissional[8].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[8].setBounds(300, 50, 100, 50);
+                //========
+                profissionais[9] = new JButton(" ");
+                profissionais[9].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[9].setBounds(400, 190, 770, 35);
+                profissionais[9].addActionListener(this); 
+                detalheProfissional[9] = new JTextArea("");
+                detalheProfissional[9].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[9].setBounds(300, 50, 100, 50);
+                //========
+                confirme = new JButton("Fechar Negocio"); cancele = new JButton("Voltar"); 
+                //========
+            //-----------------------//-----------------------//-----------------------
+            //Visibilidade
+                /*Este trecho de codigo permite desabilitar a visualizacao 
+                  de todos os componentes do campo de contratacao de profissionais,
+                  isto eh importante para que nao haja comflito com os componentes de outros campos 
+                */
+                filtroPesquisa.setVisible(false);
+                verContratos.setVisible(false);
+                for(int j=0; j<10;j++) {  	   
+                    profissionais[j].setVisible(false);
+                    detalheProfissional[j].setVisible(false);
+                }
+                confirme.setVisible(false); cancele.setVisible(false);
+            //-----------------------//-----------------------//-----------------------
+            //Adicionando as componentes ao Painel.
+                painelCliente.add(verContratos); painelCliente.add(filtroPesquisa);
+                
+                painelCliente.add(profissionais[0]); painelCliente.add(profissionais[1]); painelCliente.add(profissionais[2]); painelCliente.add(profissionais[3]);
+                painelCliente.add(profissionais[4]); painelCliente.add(profissionais[5]); painelCliente.add(profissionais[6]); painelCliente.add(profissionais[7]);
+                painelCliente.add(profissionais[8]); painelCliente.add(profissionais[9]);
+
+                painelCliente.add(detalheProfissional[0]); painelCliente.add(detalheProfissional[1]);
+
+                painelCliente.add(confirme); painelCliente.add(cancele);
         //-------------------------------------------------------------------------------------------------------------------------
         //Ativando visibilidade do painel central.        
         painelCliente.setVisible(true);
@@ -277,11 +419,11 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
             cliente.setNome(texto[0].getText());
             cliente.setCpf_cpnj(texto[1].getText());
             cliente.setIdade(texto[2].getText());
-            cliente.setPais(texto[3].getText());
-            cliente.setUf(texto[4].getText());
-            cliente.setCidade(texto[5].getText());
-            cliente.setCep(texto[6].getText());
-            cliente.setLogradouro(texto[7].getText()); 
+            e.setPais(texto[3].getText());
+            e.setUf(texto[4].getText());
+            e.setCidade(texto[5].getText());
+            e.setCep(texto[6].getText());
+            e.setLogradouro(texto[7].getText()); 
         }
     //-------------------------------------------------------------------------------------------------------------------------
     //Metodo responsavel pela edicao dos dados que aparecem no perfil
@@ -317,7 +459,6 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                         }
                     });
                     break;
-
                 case 2:
                     renomear[2].setVisible(true);
                     infoPerfil[2].setVisible(false);
@@ -332,7 +473,6 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                             }
                         }
                     });
-                    
                     break;
                 case 3:
                     renomear[3].setVisible(true);
@@ -341,14 +481,13 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                     renomear[3].addKeyListener(new java.awt.event.KeyAdapter(){
                         public void keyPressed(java.awt.event.KeyEvent evt) {
                             if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-                                cliente.setPais(renomear[3].getText());
+                                e.setPais(renomear[3].getText());
                                 renomear[3].setVisible(false);
-                                infoPerfil[3].setText("PAIS: " + cliente.getPais());
+                                infoPerfil[3].setText("PAIS: " + e.getPais());
                                 infoPerfil[3].setVisible(true);
                             }
                         }
                     });
-                    
                     break;
                 case 4:
                     renomear[4].setVisible(true);
@@ -357,14 +496,13 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                     renomear[4].addKeyListener(new java.awt.event.KeyAdapter(){
                         public void keyPressed(java.awt.event.KeyEvent evt) {
                             if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-                                cliente.setUf(renomear[4].getText());
+                                e.setUf(renomear[4].getText());
                                 renomear[4].setVisible(false);
-                                infoPerfil[4].setText("UF: " + cliente.getUf());
+                                infoPerfil[4].setText("UF: " + e.getUf());
                                 infoPerfil[4].setVisible(true);
                             }
                         }
                     });
-                    
                     break;
                 case 5:
                     renomear[5].setVisible(true);
@@ -373,14 +511,13 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                     renomear[5].addKeyListener(new java.awt.event.KeyAdapter(){
                         public void keyPressed(java.awt.event.KeyEvent evt) {
                             if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-                                cliente.setCidade(renomear[5].getText());
+                                e.setCidade(renomear[5].getText());
                                 renomear[5].setVisible(false);
-                                infoPerfil[5].setText("CIDADE: " + cliente.getCidade());
+                                infoPerfil[5].setText("CIDADE: " + e.getCidade());
                                 infoPerfil[5].setVisible(true);
                             }
                         }
                     });
-                    
                     break;
                 case 6:
                     renomear[6].setVisible(true);
@@ -389,14 +526,13 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                     renomear[6].addKeyListener(new java.awt.event.KeyAdapter(){
                         public void keyPressed(java.awt.event.KeyEvent evt) {
                             if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-                                cliente.setCep(renomear[6].getText());
+                                e.setCep(renomear[6].getText());
                                 renomear[6].setVisible(false);
-                                infoPerfil[6].setText("CEP: " + cliente.getCep());
+                                infoPerfil[6].setText("CEP: " + e.getCep());
                                 infoPerfil[6].setVisible(true);
                             }
                         }
                     });
-                    
                     break;
                 case 7:
                     renomear[7].setVisible(true);
@@ -405,15 +541,14 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                     renomear[7].addKeyListener(new java.awt.event.KeyAdapter(){
                         public void keyPressed(java.awt.event.KeyEvent evt) {
                             if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-                                cliente.setLogradouro(renomear[7].getText()); 
+                                e.setLogradouro(renomear[7].getText()); 
                                 renomear[7].setVisible(false);
-                                infoPerfil[7].setText("LOG E CASA: " + cliente.getLogradouro());
+                                infoPerfil[7].setText("LOG E CASA: " + e.getLogradouro());
                                 infoPerfil[7].setVisible(true);
                             }
                         }
                     });
                     break;
-            
             }
         }
     //-------------------------------------------------------------------------------------------------------------------------
@@ -421,6 +556,7 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
         public void deletar(){
             painelCliente.setVisible(true);
         }
+    //Metodo responsavel pelo filtro de busca
         public void pesquisar(){
             painelCliente.setVisible(true);
         }
@@ -487,11 +623,11 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
             infoPerfil[0].setText(cliente.getNome());
             infoPerfil[1].setText("CPF/CNPJ: " + cliente.getCpf_cpnj());
             infoPerfil[2].setText("IDADE: " + cliente.getIdade() +" anos");
-            infoPerfil[3].setText("PAIS: " + cliente.getPais());
-            infoPerfil[4].setText("UF: " + cliente.getUf());
-            infoPerfil[5].setText("CIDADE: " + cliente.getCidade());
-            infoPerfil[6].setText("CEP: " + cliente.getCep());
-            infoPerfil[7].setText("LOG e CASA: " + cliente.getLogradouro());
+            infoPerfil[3].setText("PAIS: " + e.getPais());
+            infoPerfil[4].setText("UF: " + e.getUf());
+            infoPerfil[5].setText("CIDADE: " + e.getCidade());
+            infoPerfil[6].setText("CEP: " + e.getCep());
+            infoPerfil[7].setText("LOG e CASA: " + e.getLogradouro());
             //========
                 /*Este trecho de codigo eh responsavel por 
                   habilitar todos os componentes do campo de visualizacao do perfil
@@ -561,8 +697,70 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
 
         //-----------------------//-----------------------//-----------------------
         else if (ae.getActionCommand().equals("HOME")) {
-            
+            //Trecho de cod que desabilita todos os componentes da tela
+                msgDespedida.setVisible(false); msgSobreposta.setVisible(false);
+                tracejado[0].setVisible(false); tracejado[1].setVisible(false);
+                for(int j=0; j<8;j++) {  	   
+                    infoPerfil[j].setVisible(false);
+                    editor[j].setVisible(false);
+                    renomear[j].setVisible(false);
+                }
+                excluirPerfil.setVisible(false);
+                dialogoDeConfirmacao.setVisible(false);
+            //========
+            /*Trecho de cod que habilita alguns componentes 
+              basicos para o funcionamento da conratacao de profissionais
+            */
+            verContratos.setVisible(true); filtroPesquisa.setVisible(true);
+            //========
+        }else if (ae.getSource() == filtroPesquisa){
+
+            if(filtroPesquisa.getSelectedItem() == "Eletricista"){
+                profissionais[0].setVisible(true);
+                profissionais[1].setVisible(true);
+
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false); 
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Mecanico") {
+                profissionais[2].setVisible(true);
+                profissionais[3].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Encanador") {
+                profissionais[4].setVisible(true);
+                profissionais[5].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Faxineiro") {
+                profissionais[6].setVisible(true);
+                profissionais[7].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false);
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Cozinheiro") {
+                profissionais[8].setVisible(true);
+                profissionais[9].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false);
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
+            }
         }
-    }
+    }              
 }
     

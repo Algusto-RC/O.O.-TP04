@@ -1,21 +1,27 @@
 package control;
 
-import java.util.*;
 import model.*;
 
-public class ControleContato {
+public class ControleContato extends Contato {
 	
-	private String telefone, email;
-	private Contato ctt = new Contato("null","null");
-	static Scanner ler=new Scanner(System.in);
-	
-	public void cadastrarTelefone() {
-		telefone = ler.nextLine();
-		ctt.setTelefone(telefone);
+	public ControleContato(String telefone, String email) {
+		super(telefone, email);
 	}
-	
-	public void cadastrarEmail() {
-		email = ler.nextLine();
-		ctt.setEmail(email);
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//GETS E SETS
+	public String getTelefone() {
+		return telefone;
+	}
+	//-----//
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	//-----//
+	public String getEmail() {
+		return email;
+	}
+	//-----//
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

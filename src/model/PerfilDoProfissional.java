@@ -2,9 +2,9 @@ package model;
 
 public class PerfilDoProfissional extends Perfil {
 	//ATRIBUTOS:
-	private Servico servicos;
-	private Contato contatos;
-	private String experiencia;
+	protected Servico servicos;
+	protected Contato contatos;
+	protected String experiencia;
 	//private Pedido pedidos[]= new Pedido[1];
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//CONSTRUTOR:

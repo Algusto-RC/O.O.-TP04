@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Servico {
 	//ATRIBUTOS:
 	static Scanner ler=new Scanner(System.in);
-	private String tipoDeServico;
-	private String formacao;
+	protected String tipoDeServico;
+	protected String formacao;
 	//private String especificacao ;
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//CONSTRUTOR:

@@ -2,16 +2,11 @@ package control;
 
 import model.*;
 
-public class ControlePerfilDoCliente {
-	private String nome, cpf_cpnj, idade, pais, cidade, cep, logradouro, uf;
+public class ControlePerfilDoCliente extends PerfilDoCliente{
+	//private String nome, cpf_cpnj, idade, pais, cidade, cep, logradouro, uf;
 
-	/*public ControlePerfilDoCliente(String nome, String cpf_cnpj, String idade, Endereco endereco) {
+	public ControlePerfilDoCliente(String nome, String cpf_cnpj, String idade, Endereco endereco) {
 		super(nome, cpf_cnpj, idade, endereco);
-		// TODO Auto-generated constructor stub
-	}*/
-
-	public ControlePerfilDoCliente(String nome){
-		this.nome = nome;
 	}
 
 	public String getNome() {
@@ -22,21 +17,12 @@ public class ControlePerfilDoCliente {
 		this.nome = nome;
 	}
 	
-	public boolean validaNome(String nome) {
-		boolean verifica=true;
-		if(nome.isEmpty()) {
-			verifica=false;
-		}
-		return verifica;
-	}
-	
 	public String getCpf_cpnj() {
-		return cpf_cpnj;
-		
+		return cpf_cnpj;
 	}
 
 	public void setCpf_cpnj(String cpf_cpnj) {
-		this.cpf_cpnj = cpf_cpnj;
+		this.cpf_cnpj = cpf_cpnj;
 	}
 
 	public String getIdade() {
@@ -47,48 +33,11 @@ public class ControlePerfilDoCliente {
 		this.idade = idade;
 	}
 
-	public String getPais() {
-		return pais;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setPais(String pais) {
-		this.pais = pais;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
-	
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-
-	
-	
-		
 }

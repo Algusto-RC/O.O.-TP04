@@ -1,4 +1,4 @@
-/*package view;
+package view;
 // Java Program to create a simple JComboBox
 // and add elements to it
 import java.awt.event.*;
@@ -6,68 +6,61 @@ import java.awt.*;
 import javax.swing.*;
 class Testador extends JFrame implements ItemListener {
  
-    // frame
     static JFrame f;
- 
-    // label
-    static JLabel l, l1;
- 
-    // combobox
-    static JComboBox c1;
+    static JComboBox filtroPesquisa;
+    static JButton[] profissionais = new JButton[2];
+    static ItemListener batata;
  
     // main class
     public static void main(String[] args)
     {
-        // create a new frame
         f = new JFrame("frame");
  
-        // create a object
         Testador s = new Testador();
  
-        // set layout of frame
-        f.setLayout(new FlowLayout());
+        f.setLayout(null);
  
-        // array of string containing cities
-        String s1[] = { "Eletricista", "Mecanico", "Encanador(a)", "Faxineiro(a)", "Cozinheiro(a)" };
+        String s1[] = { "Eletricista", "Mecanico", "Encanador", "Faxineiro", "Cozinheiro" };
  
-        // create checkbox
-        c1 = new JComboBox(s1);
- 
-        // add ItemListener
-        c1.addItemListener(s);
- 
-        // create labels
-        l = new JLabel("select your city ");
-        l1 = new JLabel("Jalpaiguri selected");
- 
-        // set color of text
-        l.setForeground(Color.red);
-        l1.setForeground(Color.blue);
- 
-        // create a new panel
+        filtroPesquisa = new JComboBox<>(s1);
+        filtroPesquisa.setBounds(10, 10, 200, 20);
+        filtroPesquisa.setVisible(true);
+        filtroPesquisa.addItemListener(s);
+
         JPanel p = new JPanel();
- 
-        p.add(l);
- 
-        // add combobox to panel
-        p.add(c1);
- 
-        p.add(l1);
- 
-        // add panel to frame
+        p.setLayout(null);
+        p.setSize(400,300);
+        
+        profissionais[0] = new JButton("Batata");
+        profissionais[0].setBounds(5, 50, 400, 25);
+        profissionais[0].setVisible(false);
+
+        p.add(profissionais[0]);
+        p.add(filtroPesquisa);
         f.add(p);
- 
-        // set the size of frame
         f.setSize(400, 300);
- 
-        f.show();
+        f.setVisible(true);
     }
-    public void itemStateChanged(ItemEvent e)
-    {
+    public void itemStateChanged(ItemEvent e){
         // if the state combobox is changed
-        if (e.getSource() == c1) {
- 
-            l1.setText(c1.getSelectedItem() + " selected");
+        if (e.getSource() == filtroPesquisa){
+
+            if(filtroPesquisa.getSelectedItem() == "Eletricista"){
+                profissionais[0].setVisible(true);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Mecanico") {
+                profissionais[0].setVisible(false);
+                
+            }else if (filtroPesquisa.getSelectedItem() == "Encanador") {
+                profissionais[0].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Faxineiro") {
+                    profissionais[0].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Cozinheiro") {
+                   profissionais[0].setVisible(false);
+
+            }
         }
     }
-}*/
+}
