@@ -39,6 +39,9 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
     ControleEndereco[] endrc = new ControleEndereco[10];
     ControleServico[] servc = new ControleServico[10];
     ControleContato[] ctt = new ControleContato[10];
+    JDialog dialogoDeConfirmacao2, dialogoDeContratos;
+    JPanel painelDialogo2, painelContratos;
+    JLabel msgAviso2, listaDeContratos;
        
 
     public ViewPerfildoCliente(){
@@ -281,13 +284,15 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 filtroPesquisa = new JComboBox<>(servicos);
                 filtroPesquisa.setBounds(1000, 90, 170, 30);
                 filtroPesquisa.addActionListener(this);
-
-                
+            //-----------------------//-----------------------//-----------------------
             //Criando e configurando os JButtons e os JTextArea para a contratacao de profissionais
                 verContratos = new JButton("Ver Contratos");
                 verContratos.setFont(new Font("Arial", Font.BOLD, 15));
                 verContratos.setBounds(400, 90, 150, 30);
                 verContratos.addActionListener(this); 
+                /*detalheProfissional[0] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[0].getNome()+". Sou "+servc[0].getTipoDeServico()+", e cobro 50 reais pela diaria.");
+                detalheProfissional[0].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[0].setBounds(300, 50, 100, 50);*/
                 //========
                 endrc[0] = new ControleEndereco("null", "null","null", "null","DF");
                 servc[0] = new ControleServico("ELETRICISTA", "TECNICO");
@@ -408,10 +413,59 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 detalheProfissional[9] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[9].getNome()+". Sou "+servc[9].getTipoDeServico()+", e cobro 350 reais pela diaria.");
                 detalheProfissional[9].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[9].setBounds(300, 50, 100, 50);
-                //========
-                confirme = new JButton("Fechar Negocio"); cancele = new JButton("Voltar"); 
+                
                 //========
             //-----------------------//-----------------------//-----------------------
+            /*//Criando e configurando a caixa de dialogo responsavel pela confirmacao da exclusao do perfil
+                dialogoDeContratos = new JDialog();
+                dialogoDeContratos.setSize(600, 150);
+                dialogoDeContratos.setLocationRelativeTo(painelCliente);
+            //Criando e configurando um painel para o dialogoDeConfirmacao
+                painelDialogo2 = new JPanel();
+                painelDialogo2.setSize(600, 200);
+                painelDialogo2.setLayout(null);
+                //========
+            //Criando e configurando o JLabel vinculado ao dialogoDeConfirmacao
+                msgAviso2 = new JLabel("...");
+                msgAviso2.setBounds(20, 20, 500, 20);
+                msgAviso2.setVisible(true);
+                //========
+            //Criando e configurando os botoes vinculados ao dialogoDeConfirmacao
+                confirme = new JButton("Fechar Negocio");  cancele = new JButton("Voltar"); 
+                confirme.setBounds(230, 70, 150, 30);     cancele.setBounds(410, 70, 150, 30);
+                confirme.setVisible(true);                 cancele.setVisible(true);
+                confirme.addActionListener(this);          cancele.addActionListener(this);
+                //========
+            //Adicionando as componentes ao Dialogo
+                painelDialogo2.add(msgAviso2); painelDialogo2.add(confirme); painelDialogo2.add(cancele); 
+                dialogoDeConfirmacao2.add(painelDialogo2);
+                //========*/
+        //-----------------------//-----------------------//-----------------------
+            //Criando e configurando a caixa de dialogo responsavel pela confirmacao da exclusao do perfil
+                dialogoDeConfirmacao2 = new JDialog();
+                dialogoDeConfirmacao2.setSize(600, 150);
+                dialogoDeConfirmacao2.setLocationRelativeTo(painelCliente);
+            //Criando e configurando um painel para o dialogoDeConfirmacao
+                painelDialogo2 = new JPanel();
+                painelDialogo2.setSize(600, 200);
+                painelDialogo2.setLayout(null);
+             //========
+            //Criando e configurando o JLabel vinculado ao dialogoDeConfirmacao
+                msgAviso2 = new JLabel("...");
+                msgAviso2.setBounds(20, 20, 500, 20);
+                msgAviso2.setVisible(true);
+             //========
+            //Criando e configurando os botoes vinculados ao dialogoDeConfirmacao
+                confirme = new JButton("Fechar Negocio");  cancele = new JButton("Voltar"); 
+                confirme.setBounds(230, 70, 150, 30);      cancele.setBounds(410, 70, 150, 30);
+                confirme.setVisible(true);                 cancele.setVisible(true);
+                confirme.addActionListener(this);          cancele.addActionListener(this);
+             //========
+            //Adicionando as componentes ao Dialogo
+                painelDialogo2.add(msgAviso2); painelDialogo2.add(confirme); painelDialogo2.add(cancele); 
+                dialogoDeConfirmacao2.add(painelDialogo2);
+            //========
+        //-----------------------//-----------------------//-----------------------
             //Visibilidade
                 /*Este trecho de codigo permite desabilitar a visualizacao 
                   de todos os componentes do campo de contratacao de profissionais,
@@ -423,7 +477,6 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                     profissionais[j].setVisible(false);
                     detalheProfissional[j].setVisible(false);
                 }
-                confirme.setVisible(false); cancele.setVisible(false);
             //-----------------------//-----------------------//-----------------------
             //Adicionando as componentes ao Painel.
                 painelCliente.add(verContratos); painelCliente.add(filtroPesquisa);
@@ -433,8 +486,6 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 painelCliente.add(profissionais[8]); painelCliente.add(profissionais[9]);
 
                 painelCliente.add(detalheProfissional[0]); painelCliente.add(detalheProfissional[1]);
-
-                painelCliente.add(confirme); painelCliente.add(cancele);
         //-------------------------------------------------------------------------------------------------------------------------
         //Ativando visibilidade do painel central.        
         painelCliente.setVisible(true);
@@ -656,6 +707,14 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
             infoPerfil[5].setText("CIDADE: " + e.getCidade());
             infoPerfil[6].setText("CEP: " + e.getCep());
             infoPerfil[7].setText("LOG e CASA: " + e.getLogradouro());
+
+            //Desabilitando as componentes do campo HOME
+            filtroPesquisa.setVisible(false);
+                verContratos.setVisible(false);
+                for(int j=0; j<10;j++) {  	   
+                    profissionais[j].setVisible(false);
+                    detalheProfissional[j].setVisible(false);
+                }
             //========
                 /*Este trecho de codigo eh responsavel por 
                   habilitar todos os componentes do campo de visualizacao do perfil
@@ -789,25 +848,45 @@ public class ViewPerfildoCliente extends JPanel implements ActionListener{
                 profissionais[6].setVisible(false); profissionais[7].setVisible(false);
             }
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[0].getNome() + " -- " + profissionaisPreCadastrados[0].getIdade() + " -- " + servc[0].getTipoDeServico() + " -- " + servc[0].getFormacao())) {
-        	detalheProfissional[0].setVisible(true);
+        	msgAviso2.setText(detalheProfissional[0].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[1].getNome() + " -- " + profissionaisPreCadastrados[1].getIdade() + " -- " + servc[1].getTipoDeServico() + " -- " + servc[1].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[1].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[2].getNome() + " -- " + profissionaisPreCadastrados[2].getIdade() + " -- " + servc[2].getTipoDeServico() + " -- " + servc[2].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[2].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[3].getNome() + " -- " + profissionaisPreCadastrados[3].getIdade() + " -- " + servc[3].getTipoDeServico() + " -- " + servc[3].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[3].getText());
+            dialogoDeConfirmacao2.setVisible(true);
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[4].getNome() + " -- " + profissionaisPreCadastrados[4].getIdade() + " -- " + servc[4].getTipoDeServico() + " -- " + servc[4].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[4].getText());
+            dialogoDeConfirmacao2.setVisible(true);
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[5].getNome() + " -- " + profissionaisPreCadastrados[5].getIdade() + " -- " + servc[5].getTipoDeServico() + " -- " + servc[5].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[5].getText());
+            dialogoDeConfirmacao2.setVisible(true);
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[6].getNome() + " -- " + profissionaisPreCadastrados[6].getIdade() + " -- " + servc[6].getTipoDeServico() + " -- " + servc[6].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[6].getText());
+            dialogoDeConfirmacao2.setVisible(true);
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[7].getNome() + " -- " + profissionaisPreCadastrados[7].getIdade() + " -- " + servc[7].getTipoDeServico() + " -- " + servc[7].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[7].getText());
+            dialogoDeConfirmacao2.setVisible(true);
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[8].getNome() + " -- " + profissionaisPreCadastrados[8].getIdade() + " -- " + servc[8].getTipoDeServico() + " -- " + servc[8].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[8].getText());
+            dialogoDeConfirmacao2.setVisible(true);
         }else if (ae.getActionCommand().equals(profissionaisPreCadastrados[9].getNome() + " -- " + profissionaisPreCadastrados[9].getIdade() + " -- " + servc[9].getTipoDeServico() + " -- " + servc[9].getFormacao())) {
-        	
+        	msgAviso2.setText(detalheProfissional[9].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+        }
+
+        else if (ae.getActionCommand().equals("Fechar Negocio")) {
+            
+        }else if (ae.getActionCommand().equals("Voltar")) {
+            dialogoDeConfirmacao2.setVisible(false);
+            
         }
     }              
 }

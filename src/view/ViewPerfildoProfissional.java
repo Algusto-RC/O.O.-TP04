@@ -3,8 +3,9 @@ package view;
 import java.awt.*; 
 import java.awt.event.*; 
 import javax.swing.*;
-import javax.swing.event.AncestorListener;
-import java.util.*;
+
+import org.w3c.dom.events.MouseEvent;
+
 import control.*;
 import model.*;
 
@@ -31,9 +32,18 @@ public class ViewPerfildoProfissional extends JPanel implements ActionListener{
 
     //Componentes para o campo de contratação de profissionais 
     JComboBox filtroPesquisa;
-    JButton verContratos, cancele, confirme; JButton [] profissionais = new JButton[25];
-    JTextArea[] detalheProfissional = new JTextArea[25];
-    
+    String[] servicos = { "Eletricista", "Mecanico", "Encanador", "Faxineiro", "Cozinheiro" };
+    JButton verContratos, cancele, confirme; JButton [] profissionais = new JButton[10];
+    JTextArea[] detalheProfissional = new JTextArea[10];
+    ControlePerfilDoProfissional[] profissionaisPreCadastrados = new ControlePerfilDoProfissional[10]; 
+    ControleEndereco[] endrc = new ControleEndereco[10];
+    ControleServico[] servc = new ControleServico[10];
+    ControleContato[] ctt = new ControleContato[10];
+    JDialog dialogoDeConfirmacao2, dialogoDeContratos;
+    JPanel painelDialogo2, painelContratos;
+    JLabel msgAviso2, listaDeContratos;
+       
+
     public ViewPerfildoProfissional(){
         //Criando o Painel principal 
             painelCliente = new JPanel();
@@ -42,7 +52,7 @@ public class ViewPerfildoProfissional extends JPanel implements ActionListener{
         //-----------------------//-----------------------//-----------------------
         //PAINEL DE CADASTRO
             // Criando e configurando a imagem que aparece durante o cadastro de cliente.
-                imagemFundo = new ImageIcon(getClass().getResource("backgroundcliente.PNG"));
+                imagemFundo = new ImageIcon(getClass().getResource("backgroundprofissional.PNG"));
                 telaFundo = new JLabel(imagemFundo);
                 telaFundo.setBounds(345, -50, 1080, 811);
                 telaFundo.setVisible(true);
@@ -271,29 +281,211 @@ public class ViewPerfildoProfissional extends JPanel implements ActionListener{
         //-------------------------------------------------------------------------------------------------------------------------
         //PAINEL PARA CONTRATACAO DE PROFISSIONAIS
             //Criando e configurando os JComboBox para o filtro de pesquisa
-                filtroPesquisa = new JComboBox<>();
-
+                filtroPesquisa = new JComboBox<>(servicos);
+                filtroPesquisa.setBounds(1000, 90, 170, 30);
+                filtroPesquisa.addActionListener(this);
+            //-----------------------//-----------------------//-----------------------
             //Criando e configurando os JButtons e os JTextArea para a contratacao de profissionais
                 verContratos = new JButton("Ver Contratos");
-                verContratos.setBounds(300, 50, 100, 50);
+                verContratos.setFont(new Font("Arial", Font.BOLD, 15));
+                verContratos.setBounds(400, 90, 150, 30);
                 verContratos.addActionListener(this); 
-
-                profissionais[0] = new JButton(" ");
-                profissionais[0].setFont(new Font("Arial", Font.BOLD, 35));
-                profissionais[0].setBounds(300, 50, 100, 50);
+                /*detalheProfissional[0] = new JTextArea("Ola, me chamo "+profissionaisPreCadastrados[0].getNome()+". Sou "+servc[0].getTipoDeServico()+", e cobro 50 reais pela diaria.");
+                detalheProfissional[0].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[0].setBounds(300, 50, 100, 50);*/
+                //========
+                endrc[0] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[0] = new ControleServico("ELETRICISTA", "TECNICO");
+                ctt[0]= new ControleContato("(89) 98361-3677)", "vitor@gmail.com");
+                profissionaisPreCadastrados[0] = new ControlePerfilDoProfissional("Vitor", "055.963.741-02", "25 anos", endrc[0], servc[0], ctt[0], "4");
+                profissionais[0] = new JButton("Vitor -- necessitando de um ELETRICISTA");
+                profissionais[0].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[0].setBounds(400, 150, 770, 35);
                 profissionais[0].addActionListener(this); 
-                
-                detalheProfissional[0] = new JTextArea("");
+                detalheProfissional[0] = new JTextArea("Ola, me chamo Vitor e estou necessitando de um eletricista. Voce tem interesse?");
                 detalheProfissional[0].setFont(new Font("Arial", Font.BOLD, 35));
                 detalheProfissional[0].setBounds(300, 50, 100, 50);
+                //========
+                endrc[1] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[1] = new ControleServico("ELETRICISTA", "SUPERIOR");
+                ctt[1]= new ControleContato("(71) 98705-8149", "eliasmarujo@gmail.com");
+                profissionaisPreCadastrados[1] = new ControlePerfilDoProfissional("Elias", "066.963.852-02", "22 anos", endrc[1], servc[1], ctt[1], "4");
+                profissionais[1] = new JButton("Elias -- necessitando de um ELETRICISTA");
+                profissionais[1].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[1].setBounds(400, 190, 770, 35);
+                profissionais[1].addActionListener(this); 
+                detalheProfissional[1] = new JTextArea("Ola, me chamo Elias e estou necessitando de um eletricista. Voce tem interesse?");
+                detalheProfissional[1].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[1].setBounds(300, 50, 100, 50);
+                //========
+                endrc[2] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[2] = new ControleServico("MECANICO", "SUPERIOR");
+                ctt[2]= new ControleContato("(63) 97929-5436", "joaoirmaodemaria@gmail.com");
+                profissionaisPreCadastrados[2] = new ControlePerfilDoProfissional("Joao", "066.963.862-02", "29 anos", endrc[2], servc[2], ctt[2], "4");
+                profissionais[2] = new JButton("Joao -- necessitando de um MECANICO");
+                profissionais[2].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[2].setBounds(400, 150, 770, 35);
+                profissionais[2].addActionListener(this); 
+                detalheProfissional[2] = new JTextArea("Ola, me chamo Joao e estou necessitando de um mecanico. Voce tem interesse?");
+                detalheProfissional[2].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[2].setBounds(300, 50, 100, 50);
+                //========
+                endrc[3] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[3] = new ControleServico("MECANICO", "MEDIO");
+                ctt[3]= new ControleContato("(63) 97929-5436", "vilmar2424@gmail.com");
+                profissionaisPreCadastrados[3] = new ControlePerfilDoProfissional("Vilmar", "069.963.852-02", "55 anos", endrc[3], servc[3], ctt[3], "4");
+                profissionais[3] = new JButton("Vilmar -- necessitando de um MECANICO");
+                profissionais[3].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[3].setBounds(400, 190, 770, 35);
+                profissionais[3].addActionListener(this); 
+                detalheProfissional[3] = new JTextArea("Ola, me chamo Vilmar e estou necessitando de um mecanico. Voce tem interesse?");
+                detalheProfissional[3].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[3].setBounds(300, 50, 100, 50);
+                //========
+                endrc[4] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[4] = new ControleServico("ENCANADOR", "MEDIO");
+                ctt[4]= new ControleContato("(62) 97829-5336", "lissandra.duarte@gmail.com");
+                profissionaisPreCadastrados[4] = new ControlePerfilDoProfissional("Lissandra", "069.963.852-02", "43 anos", endrc[4], servc[4], ctt[4], "4");
+                profissionais[4] = new JButton("Lissandra -- necessitando de um ENCANADOR");  
+                profissionais[4].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[4].setBounds(400, 150, 770, 35);
+                profissionais[4].addActionListener(this); 
+                detalheProfissional[4] = new JTextArea("Ola, me chamo Lissandra e estou necessitando de um encanador. Voce tem interesse?");
+                detalheProfissional[4].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[4].setBounds(300, 50, 100, 50);
+                //========
+                endrc[5] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[5] = new ControleServico("ENCANADOR", "SUPERIOR");
+                ctt[5]= new ControleContato("(66) 97929-5321", "leandrodonizete@gmail.com");
+                profissionaisPreCadastrados[5] = new ControlePerfilDoProfissional("Leandro", "066.963.252-02", "24 anos", endrc[5], servc[5], ctt[5], "4");
+                profissionais[5] = new JButton("Leandro -- necessitando de um ENCANADOR");
+                profissionais[5].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[5].setBounds(400, 190, 770, 35);
+                profissionais[5].addActionListener(this); 
+                detalheProfissional[5] = new JTextArea("Ola, me chamo Leandro e estou necessitando de um encanador. Voce tem interesse?");
+                detalheProfissional[5].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[5].setBounds(300, 50, 100, 50);
+                //========
+                endrc[6] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[6] = new ControleServico("FAXINEIRO", "MEDIO");
+                ctt[6]= new ControleContato("(61) 97429-3423", "dioniziocerqueira@gmail.com");
+                profissionaisPreCadastrados[6] = new ControlePerfilDoProfissional("Dionizio", "067.977.852-02", "34 anos", endrc[6], servc[6], ctt[6], "4");
+                profissionais[6] = new JButton("Dionizio -- necessitando de um FAXINEIRO");
+                profissionais[6].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[6].setBounds(400, 150, 770, 35);
+                profissionais[6].addActionListener(this); 
+                detalheProfissional[6] = new JTextArea("Ola, me chamo Dionizio e estou necessitando de um faxineiro. Voce tem interesse?");
+                detalheProfissional[6].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[6].setBounds(300, 50, 100, 50);
+                //========
+                endrc[7] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[7] = new ControleServico("FAXINEIRO", "MEDIO");
+                ctt[7]= new ControleContato("(61) 97927-6236", "petkovicflamengo@gmail.com");
+                profissionaisPreCadastrados[7] = new ControlePerfilDoProfissional("Petkovic", "067.967.822-02", "24 anos", endrc[7], servc[7], ctt[7], "4");
+                profissionais[7] = new JButton("Petkovic -- necessitando de um FAXINEIRO");
+                profissionais[7].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[7].setBounds(400, 190, 770, 35);
+                profissionais[7].addActionListener(this); 
+                detalheProfissional[7] = new JTextArea("Ola, me chamo Petkovic e estou necessitando de um faxineiro. Voce tem interesse?");
+                detalheProfissional[7].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[7].setBounds(300, 50, 100, 50);
+                //========
+                endrc[8] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[8] = new ControleServico("COZINHEIRO", "SUPERIOR");
+                ctt[8]= new ControleContato("(61) 97927-6236", "lucarelisadacruzeiro@gmail.com");
+                profissionaisPreCadastrados[8] = new ControlePerfilDoProfissional("Lucareli", "066.957.222-02", "30 anos", endrc[8], servc[8], ctt[8], "4");
+                profissionais[8] = new JButton("Lucareli -- necessitando de um COZINHEIRO");
+                profissionais[8].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[8].setBounds(400, 150, 770, 35);
+                profissionais[8].addActionListener(this); 
+                detalheProfissional[8] = new JTextArea("Ola, me chamo Lucareli e estou necessitando de um cozinheiro. Voce tem interesse?");
+                detalheProfissional[8].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[8].setBounds(300, 50, 100, 50);
+                //========
+                endrc[9] = new ControleEndereco("null", "null","null", "null","DF");
+                servc[9] = new ControleServico("COZINHEIRO", "SUPERIOR");
+                ctt[9]= new ControleContato("(65) 97977-6736", "leonardodavincitartaruga@gmail.com");
+                profissionaisPreCadastrados[9] = new ControlePerfilDoProfissional("Leonardo", "062.267.622-02", "27 anos", endrc[9], servc[9], ctt[9], "4");
+                profissionais[9] = new JButton("Leonardo -- necessitando de um COZINHEIRO");
+                profissionais[9].setFont(new Font("Arial", Font.BOLD, 20));
+                profissionais[9].setBounds(400, 190, 770, 35);
+                profissionais[9].addActionListener(this); 
+                detalheProfissional[9] = new JTextArea("Ola, me chamo Leonardo e estou necessitando de um cozinheiro. Voce tem interesse?");
+                detalheProfissional[9].setFont(new Font("Arial", Font.BOLD, 35));
+                detalheProfissional[9].setBounds(300, 50, 100, 50);
                 
-
-
-                confirme = new JButton("Fechar Negocio"); cancele = new JButton("Voltar"); 
+                //========
+            //-----------------------//-----------------------//-----------------------
+            /*//Criando e configurando a caixa de dialogo responsavel pela confirmacao da exclusao do perfil
+                dialogoDeContratos = new JDialog();
+                dialogoDeContratos.setSize(600, 150);
+                dialogoDeContratos.setLocationRelativeTo(painelCliente);
+            //Criando e configurando um painel para o dialogoDeConfirmacao
+                painelDialogo2 = new JPanel();
+                painelDialogo2.setSize(600, 200);
+                painelDialogo2.setLayout(null);
+                //========
+            //Criando e configurando o JLabel vinculado ao dialogoDeConfirmacao
+                msgAviso2 = new JLabel("...");
+                msgAviso2.setBounds(20, 20, 500, 20);
+                msgAviso2.setVisible(true);
+                //========
+            //Criando e configurando os botoes vinculados ao dialogoDeConfirmacao
+                confirme = new JButton("Fechar Negocio");  cancele = new JButton("Voltar"); 
+                confirme.setBounds(230, 70, 150, 30);     cancele.setBounds(410, 70, 150, 30);
+                confirme.setVisible(true);                 cancele.setVisible(true);
+                confirme.addActionListener(this);          cancele.addActionListener(this);
+                //========
+            //Adicionando as componentes ao Dialogo
+                painelDialogo2.add(msgAviso2); painelDialogo2.add(confirme); painelDialogo2.add(cancele); 
+                dialogoDeConfirmacao2.add(painelDialogo2);
+                //========*/
+        //-----------------------//-----------------------//-----------------------
+            //Criando e configurando a caixa de dialogo responsavel pela confirmacao da exclusao do perfil
+                dialogoDeConfirmacao2 = new JDialog();
+                dialogoDeConfirmacao2.setSize(600, 150);
+                dialogoDeConfirmacao2.setLocationRelativeTo(painelCliente);
+            //Criando e configurando um painel para o dialogoDeConfirmacao
+                painelDialogo2 = new JPanel();
+                painelDialogo2.setSize(600, 200);
+                painelDialogo2.setLayout(null);
+             //========
+            //Criando e configurando o JLabel vinculado ao dialogoDeConfirmacao
+                msgAviso2 = new JLabel("...");
+                msgAviso2.setBounds(20, 20, 500, 20);
+                msgAviso2.setVisible(true);
+             //========
+            //Criando e configurando os botoes vinculados ao dialogoDeConfirmacao
+                confirme = new JButton("Fechar Negocio");  cancele = new JButton("Voltar"); 
+                confirme.setBounds(230, 70, 150, 30);      cancele.setBounds(410, 70, 150, 30);
+                confirme.setVisible(true);                 cancele.setVisible(true);
+                confirme.addActionListener(this);          cancele.addActionListener(this);
+             //========
+            //Adicionando as componentes ao Dialogo
+                painelDialogo2.add(msgAviso2); painelDialogo2.add(confirme); painelDialogo2.add(cancele); 
+                dialogoDeConfirmacao2.add(painelDialogo2);
+            //========
+        //-----------------------//-----------------------//-----------------------
+            //Visibilidade
+                /*Este trecho de codigo permite desabilitar a visualizacao 
+                  de todos os componentes do campo de contratacao de profissionais,
+                  isto eh importante para que nao haja comflito com os componentes de outros campos 
+                */
+                filtroPesquisa.setVisible(false);
+                verContratos.setVisible(false);
+                for(int j=0; j<10;j++) {  	   
+                    profissionais[j].setVisible(false);
+                    detalheProfissional[j].setVisible(false);
+                }
             //-----------------------//-----------------------//-----------------------
             //Adicionando as componentes ao Painel.
-            
+                painelCliente.add(verContratos); painelCliente.add(filtroPesquisa);
+                
+                painelCliente.add(profissionais[0]); painelCliente.add(profissionais[1]); painelCliente.add(profissionais[2]); painelCliente.add(profissionais[3]);
+                painelCliente.add(profissionais[4]); painelCliente.add(profissionais[5]); painelCliente.add(profissionais[6]); painelCliente.add(profissionais[7]);
+                painelCliente.add(profissionais[8]); painelCliente.add(profissionais[9]);
 
+                painelCliente.add(detalheProfissional[0]); painelCliente.add(detalheProfissional[1]);
         //-------------------------------------------------------------------------------------------------------------------------
         //Ativando visibilidade do painel central.        
         painelCliente.setVisible(true);
@@ -515,6 +707,14 @@ public class ViewPerfildoProfissional extends JPanel implements ActionListener{
             infoPerfil[5].setText("CIDADE: " + e.getCidade());
             infoPerfil[6].setText("CEP: " + e.getCep());
             infoPerfil[7].setText("LOG e CASA: " + e.getLogradouro());
+
+            //Desabilitando as componentes do campo HOME
+            filtroPesquisa.setVisible(false);
+                verContratos.setVisible(false);
+                for(int j=0; j<10;j++) {  	   
+                    profissionais[j].setVisible(false);
+                    detalheProfissional[j].setVisible(false);
+                }
             //========
                 /*Este trecho de codigo eh responsavel por 
                   habilitar todos os componentes do campo de visualizacao do perfil
@@ -585,16 +785,109 @@ public class ViewPerfildoProfissional extends JPanel implements ActionListener{
         //-----------------------//-----------------------//-----------------------
         else if (ae.getActionCommand().equals("HOME")) {
             //Trecho de cod que desabilita todos os componentes da tela
-            msgDespedida.setVisible(false); msgSobreposta.setVisible(false);
-            tracejado[0].setVisible(false); tracejado[1].setVisible(false);
-            for(int j=0; j<8;j++) {  	   
-                infoPerfil[j].setVisible(false);
-                editor[j].setVisible(false);
-                renomear[j].setVisible(false);
+                msgDespedida.setVisible(false); msgSobreposta.setVisible(false);
+                tracejado[0].setVisible(false); tracejado[1].setVisible(false);
+                for(int j=0; j<8;j++) {  	   
+                    infoPerfil[j].setVisible(false);
+                    editor[j].setVisible(false);
+                    renomear[j].setVisible(false);
+                }
+                excluirPerfil.setVisible(false);
+                dialogoDeConfirmacao.setVisible(false);
+            //========
+            /*Trecho de cod que habilita alguns componentes 
+              basicos para o funcionamento da conratacao de profissionais
+            */
+            verContratos.setVisible(true); filtroPesquisa.setVisible(true);
+            //========
+        }else if (ae.getSource() == filtroPesquisa){
+
+            if(filtroPesquisa.getSelectedItem() == "Eletricista"){
+                profissionais[0].setVisible(true);
+                profissionais[1].setVisible(true);
+
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false); 
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Mecanico") {
+                profissionais[2].setVisible(true);
+                profissionais[3].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Encanador") {
+                profissionais[4].setVisible(true);
+                profissionais[5].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Faxineiro") {
+                profissionais[6].setVisible(true);
+                profissionais[7].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false);
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[8].setVisible(false); profissionais[9].setVisible(false);
+
+            }else if (filtroPesquisa.getSelectedItem() == "Cozinheiro") {
+                profissionais[8].setVisible(true);
+                profissionais[9].setVisible(true);
+
+                profissionais[0].setVisible(false); profissionais[1].setVisible(false); 
+                profissionais[2].setVisible(false); profissionais[3].setVisible(false);
+                profissionais[4].setVisible(false); profissionais[5].setVisible(false);
+                profissionais[6].setVisible(false); profissionais[7].setVisible(false);
             }
-            excluirPerfil.setVisible(false);
-            dialogoDeConfirmacao.setVisible(false);
+        }else if (ae.getActionCommand().equals("Vitor -- necessitando de um ELETRICISTA")) {
+        	msgAviso2.setText(detalheProfissional[0].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+
+        }else if (ae.getActionCommand().equals("Elias -- necessitando de um ELETRICISTA")) {
+        	msgAviso2.setText(detalheProfissional[1].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+
+        }else if (ae.getActionCommand().equals("Joao -- necessitando de um MECANICO")) {
+        	msgAviso2.setText(detalheProfissional[2].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+
+        }else if (ae.getActionCommand().equals("Vilmar-- necessitando de um MECANICO")) {
+        	msgAviso2.setText(detalheProfissional[3].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+        }else if (ae.getActionCommand().equals("Lissandra -- necessitando de um ENCANADOR")) {
+        	msgAviso2.setText(detalheProfissional[4].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+        }else if (ae.getActionCommand().equals("Leandro -- necessitando de um ENCANADOR")) {
+        	msgAviso2.setText(detalheProfissional[5].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+        }else if (ae.getActionCommand().equals("Dionizio -- necessitando de um FAXINEIRO")) {
+        	msgAviso2.setText(detalheProfissional[6].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+        }else if (ae.getActionCommand().equals("Petkovic -- necessitando de um FAXINEIRO")) {
+        	msgAviso2.setText(detalheProfissional[7].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+        }else if (ae.getActionCommand().equals("Lucareli -- necessitando de um COZINHEIRO")) {
+        	msgAviso2.setText(detalheProfissional[8].getText());
+            dialogoDeConfirmacao2.setVisible(true);
+        }else if (ae.getActionCommand().equals("Leonardo-- necessitando de um COZINHEIRO")) {
+        	msgAviso2.setText(detalheProfissional[9].getText());
+            dialogoDeConfirmacao2.setVisible(true);
         }
-    }
+
+        else if (ae.getActionCommand().equals("Fechar Negocio")) {
+            
+        }else if (ae.getActionCommand().equals("Voltar")) {
+            dialogoDeConfirmacao2.setVisible(false);
+            
+        }
+    }              
 }
     
